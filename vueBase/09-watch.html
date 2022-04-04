@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMX</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <template id="myapp">
+        <input type="text" v-model="question">
+        <div>
+            {{question}}
+        </div>
+        <hr>
+        <div>{{info}}</div>
+        <button @click="changeInfoName">changeInfoName</button>
+        默认的情况下,仅仅是改变对象里面的一个值是不会进行监听的
+        <button @click="changeInfo">changeInfo</button>
+        <hr>
+        <div>{{infos}}</div>
+        <button @click="changeInfosName">changeInfosName</button>
+        深度监听
+        <button @click="changeInfos">changeInfos</button>
+    </template>
+
+    <script src="../js/vue.global.js"></script>
+    <script>
+        const App = {
+            template: '#myapp',
+            data() {
+                return {
+                    test: "test message",
+                    question: "12345",
+                    info: {
+                        name: 'zhs',
+                        age: 18
+                    },
+                    infos: {
+                        name: 'zhs',
+                        age: 18
+                    }
+                }
+            },
+            watch: {
+                question(newQuestion, oldQuestion) {
+                    console.log(newQuestion);
+                },
+                infos(n, o) {
+                    console.log(n);
+                },
+
+                info: {
+                    handler: function (n, o) {
+                        console.log(n);
+                    },
+                    deep: true,//深度监听
+                    immediate: true//开始前先执行一次
+                }
+            },
+            methods: {
+                setQue() {
+                    console.log(this.question);
+                },
+                changeInfoName() {
+                    this.info.name = 'hhh'
+                },
+                changeInfo() {
+                    this.info = { l: 'list' }
+                },
+                changeInfosName() {
+                    this.infos.name = 'hhh'
+                },
+                changeInfos() {
+                    this.infos = { l: 'list' }
+                }
+            },
+        }
+        Vue.createApp(App).mount('#app')
+    </script>
+</body>
+
+</html>

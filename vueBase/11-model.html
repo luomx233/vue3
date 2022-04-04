@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMX</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <template id="myapp">
+        <div>
+            <h2>绑定输入框</h2>
+            <input type="text" v-model="message">
+            {{message}}
+            <hr>
+            <h2>绑定textare</h2>
+            <textarea name="" id="" cols="30" rows="10" v-model="text"></textarea>
+            {{text}}
+            <hr>
+            <h2>绑定单选多选框</h2>
+            <label for="agree">
+                <input id="agree" type="checkbox" v-model="isAgree">是否同意
+            </label>
+            <br>
+            多选框
+            <label for="sing">
+                <input id="sing" value="sing" type="checkbox" v-model="likes">唱
+            </label>
+            <label for="dance">
+                <input id="dance" value="dance" type="checkbox" v-model="likes">跳
+            </label>
+            <label for="rap">
+                <input id="rap" value="rap" type="checkbox" v-model="likes">rap
+            </label>
+            <label for="basketball">
+                <input id="basketball" value="basketball" type="checkbox" v-model="likes">篮球
+            </label>
+            {{likes}}
+            <hr>
+            <h2>绑定选择按钮</h2>
+            <label for="gender">
+                <input id="male" value="male" type="radio" v-model="gender">男
+            </label>
+            <label for="female">
+                <input id="female" value="female" type="radio" v-model="gender">女
+            </label>
+            {{gender}}
+            <hr>
+            <h2>选择框</h2>
+            <select name="games" id="games" v-model="games">
+                <option value="原神">原神</option>
+                <option value="CF">CF</option>
+                <option value="CSGO">CSGO</option>
+                <option value="Arknights">Arknights</option>
+            </select>
+            {{games}}
+            <hr>
+            <h2>修饰符</h2>
+            <h4>lazy修饰符 回车键</h4>
+            <input type="text" v-model.lazy="message">
+            {{message}}
+            <h4>number修饰符</h4>
+            <input type="text" v-model.number="number1" @keyup="types()">
+            {{number1}} +++ {{ntype}}
+            <h4>trim修饰符 去除前后空格</h4>
+            <input type="text" v-model.trim="message">
+            {{message}}
+        </div>
+    </template>
+
+    <script src="../js/vue.global.js"></script>
+    <script>
+        const App = {
+            template: '#myapp',
+            data() {
+                return {
+                    test: "test message",
+                    message: '',
+                    text: '',
+                    isAgree: true,
+                    likes: [
+
+                    ],
+                    gender: '',
+                    games: '',
+                    number1: 100,
+                    ntype: ''
+
+                }
+            },
+            methods: {
+                types() {
+                    console.log(111);
+                    this.ntype = typeof this.number1
+                }
+            },
+        }
+        Vue.createApp(App).mount('#app')
+    </script>
+</body>
+
+</html>

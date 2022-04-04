@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMX</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <template id="myapp">
+        <div>
+            {{test}}
+            使用for来循环一个数组 v-for="(n,index) in mates"
+            <ul>
+                <li v-for="(n,index) in mates" :key="n">{{index+1+"-"+n}}</li>
+            </ul>
+            <hr>
+            使用for来循环一个对象 v-for="(n,k) in infos"
+            <ul>
+                <li v-for="(n,k) in infos">{{k}}+{{n}}</li>
+            </ul>
+            使用for来循环一数字 v-for="n in 5"
+            <ul>
+                <li v-for="n in 5">{{n}}</li>
+            </ul>
+        </div>
+        增减数组
+        <input type="text" v-model="news"><button @click="addMates">添加</button>
+
+        <hr>
+        插入f来分析key的作用
+        <ul>
+            <li v-for="(item, index) in items" :key="index"> {{item}}</li>
+        </ul>
+        <ul>
+            <li v-for="item in items"> {{item}}</li>
+        </ul>
+        <button @click="insertF">insert</button>
+    </template>
+
+    <script src="../js/vue.global.js"></script>
+    <script>
+        const App = {
+            template: '#myapp',
+            data() {
+                return {
+                    items: [
+                        'a', 'b', 'c', 'd'
+                    ],
+                    news: "",
+                    test: "test message",
+                    mates: [
+                        "zhs",
+                        "zyb",
+                        "cyf",
+                        "gjm"
+                    ],
+                    infos: {
+                        name: "zhs",
+                        age: 18,
+                        gender: 'male'
+                    }
+                }
+            },
+            methods: {
+                addMates() {
+                    this.mates.push(this.news)
+                    this.news = ""
+                },
+                insertF() {
+                    this.items.splice(2, 0, 'f')
+                }
+            },
+        }
+        Vue.createApp(App).mount('#app')
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMX</title>
+</head>
+
+<body>
+    <div id="app">
+
+    </div>
+
+    <template id="myapp">
+        <div>
+            {{test}}
+        </div>
+
+        <testa></testa>
+        <testb></testb>
+        <testb></testb>
+        <testb></testb>
+        <hr>
+
+        <component-c></component-c>
+    </template>
+
+
+    <template id="testb">
+        <div>
+            <h4>哈哈哈</h4>
+            这是一个组件,这个组件名称是testb
+            <button>hh</button>
+        </div>
+    </template>
+    <template id="componentC">
+        <div>
+            <h4>这是一个c组件</h4>
+        </div>
+    </template>
+    <script src="../js/vue.global.js"></script>
+    <script>
+        const componentC = {
+            template: "#componentC"
+        }
+        const app = Vue.createApp({
+            //局部组件
+            component: {
+                componentC
+            },
+            template: '#myapp',
+            data() {
+                return {
+                    test: "test message"
+                }
+            },
+
+
+        })
+
+        //全局组件:任何时候都会进行加载打包
+        // 使用app注册一个全局组件
+        app.component("testa", {
+            template: '<h2>这是一个组件</h2>'
+        })
+
+        //使用app注册,但是模板抽离
+        app.component("testb", {
+            template: '#testb',
+            methods: {
+
+            },
+        })
+        app.mount('#app')
+    </script>
+</body>
+
+</html>

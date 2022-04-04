@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMX</title>
+    <style>
+        .active {
+            color: hotpink;
+        }
+
+        .tittle {
+            font-size: 2em;
+            font-weight: bolder;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <template id="myapp">
+        <div>
+            {{test}}
+        </div>
+        <hr>
+        v-bind <br>
+        <a v-bind:href="link">hot door</a><br>
+        <img v-bind:src="imgUrl" alt="">
+        <hr>
+        :
+        <br>
+        <a :href="link">hot door</a><br>
+        <img :src="imgUrl" alt="">
+        <hr>
+        : class Object 多个键值对
+        <div :class="{active:isActive,tittle:isTittle}">
+            active!!
+        </div>
+        <button @click="changeActive">changeActive</button>
+        <button @click="changeTittle">changeTittle</button>
+        <hr>
+        : style
+        <div :style="{color:'red',fontSize:fontSize}">
+            : style
+        </div>
+        <hr>
+        动态绑定属性
+        <div v-bind:[attributeName]="attributeValue">haha</div>
+        <div v-bind="info">attr</div>
+    </template>
+    <div luomx="233">attr</div>
+    <script src="../js/vue.global.js"></script>
+    <script>
+        const App = {
+            template: '#myapp',
+            data() {
+                return {
+                    test: "test message",
+                    imgUrl: 'https://i0.hdslb.com/bfs/archive/ca375eb31fa90b8e23b88ed3433c2f60de1c2e6e.png',
+                    link: 'https://www.bilibili.com/v/popular/all?spm_id_from=333.851.b_7072696d61727950616765546162.3'
+                    , isActive: false
+                    , isTittle: false
+                    , fontSize: '20px'
+                    , attributeName: "attrs"
+                    , attributeValue: 'hello'
+                    , info: {
+                        name: 'lmx',
+                        age: 18,
+                        gender: 'male'
+                    }
+                }
+            },
+            methods: {
+                changeActive() {
+                    this.isActive = !this.isActive
+                },
+                changeTittle() {
+                    this.isTittle = !this.isTittle
+                },
+            },
+        }
+        Vue.createApp(App).mount('#app')
+    </script>
+</body>
+
+</html>

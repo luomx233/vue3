@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMX</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <template id="myapp">
+        <div>
+            <p>直接在大括号里+ {{firseName+" "+lastName}}</p>
+            <p>使用method {{getJoinedName()}} {{met}}</p>
+            <p>使用computed {{joinedName}} {{com}}</p>
+            <p>使用method {{getJoinedName()}} {{met}}</p>
+            <p>使用computed {{joinedName}} {{com}}</p>
+            <p>使用method {{getJoinedName()}} {{met}}</p>
+            <p>使用computed {{joinedName}} {{com}}</p>
+        </div>
+    </template>
+
+    <script src="../js/vue.global.js"></script>
+    <script>
+        const App = {
+            template: '#myapp',
+            data() {
+                return {
+                    test: "test message",
+                    firseName: 'zhang',
+                    lastName: 'haishui',
+                    com: 0,
+                    met: 0
+                }
+            },
+            methods: {
+                getJoinedName() {
+                    this.met++
+                    return this.firseName + " " + this.lastName
+                }
+            },
+            computed: {
+                joinedName() {
+                    this.com++
+                    return this.firseName + " " + this.lastName
+                }
+            }
+        }
+        Vue.createApp(App).mount('#app')
+    </script>
+</body>
+
+</html>

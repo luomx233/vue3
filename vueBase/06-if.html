@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMX</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <template id="myapp">
+        <div v-if="isshow">
+            {{test}}
+        </div>
+        <button @click="change">show~~</button>
+        <br>
+        <br>
+        <input type="range" name="" id="range" min="0" max="100" step="1" v-model="rangeNum">
+        <p>{{rangeNum}} </p>
+        <div v-if="rangeNum>90">
+            优秀
+        </div>
+        <div v-else-if="rangeNum>60">
+            也就及格
+        </div>
+        <div v-else>
+            哈哈不及格
+        </div>
+        <hr>
+        使用template可以避免多出来的div元素<br>
+        <template v-if="rangeNum>90">
+            优秀
+        </template>
+        <template v-else-if="rangeNum>60">
+            也就及格
+        </template>
+        <template v-else>
+            哈哈不及格
+        </template>
+        <hr>
+    </template>
+
+    <script src="../js/vue.global.js"></script>
+    <script>
+        const App = {
+            template: '#myapp',
+            data() {
+                return {
+                    test: "test message",
+                    isshow: true,
+                    rangeNum: 0
+                }
+            },
+            methods: {
+                change() {
+                    this.isshow = !this.isshow
+                },
+                getRange(e, value) {
+                    console.log(e);
+                    this.rangeNum = value
+                }
+            },
+        }
+        Vue.createApp(App).mount('#app')
+    </script>
+</body>
+
+</html>

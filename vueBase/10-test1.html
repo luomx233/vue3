@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMX</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <template id="myapp">
+        <div>
+            <table border="1">
+                <caption>图书购物车</caption>
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>书名</th>
+                        <th>单价</th>
+                        <th>操作</th>
+                        <th>移除</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <template v-if="books!=''">
+                        <tr v-for="(item, index) in books" :key="index">
+                            <td>{{index+1}}</td>
+                            <td>{{item.name}}</td>
+                            <td>¥{{item.price}}</td>
+                            <td>
+                                <button @click="countIncrease(index)" :disabled="item.count<=1">-</button>
+                                {{item.count}}
+                                <button @click="countCrease(index)">+</button>
+                            </td>
+                            <td><button @click="deleteBook(index)">删除</button></td>
+                        </tr>
+                    </template>
+                    <template v-else>
+                        <tr>
+                            没有图书!
+                        </tr>
+                    </template>
+                </tbody>
+
+            </table>
+            <tfoot>
+                <h4>总价格:¥{{totlePrice}}</h4>
+            </tfoot>
+        </div>
+    </template>
+
+    <script src="../js/vue.global.js"></script>
+    <script>
+        const App = {
+            template: '#myapp',
+            data() {
+                return {
+                    test: "test message",
+                    books: [
+                        {
+                            name: '神雕',
+                            price: 25,
+                            count: 1
+                        },
+                        {
+                            name: '侠女',
+                            price: 38,
+                            count: 1
+                        },
+                        {
+                            name: '雪中',
+                            price: 43,
+                            count: 1
+                        },
+                        {
+                            name: '悍刀行',
+                            price: 55,
+                            count: 1
+                        },
+                    ]
+                }
+            },
+            methods: {
+                countCrease(index) {
+                    this.books[index].count++
+                },
+                countIncrease(index) {
+                    this.books[index].count--
+                },
+                deleteBook(index) {
+                    this.books.splice(index, 1)
+                }
+            },
+            computed: {
+                totlePrice() {
+                    totlePrice = 0
+                    for (const item of this.books) {
+                        totlePrice += item.count * item.price
+                    }
+                    return totlePrice
+                }
+            }
+        }
+        Vue.createApp(App).mount('#app')
+    </script>
+</body>
+
+</html>
